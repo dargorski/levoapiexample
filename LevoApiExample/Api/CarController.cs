@@ -5,7 +5,7 @@ using System;
 
 namespace LevoApiExample.Api
 {
-    //[Authorize]
+    [Authorize]
     public class CarController : ApiController
     {
         private readonly ApplicationDbContext context;
