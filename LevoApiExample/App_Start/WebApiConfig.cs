@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Serialization;
+using Autofac.Integration.WebApi;
 
 namespace LevoApiExample
 {
@@ -14,6 +10,10 @@ namespace LevoApiExample
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
+            var bootstrapper = new Bootstrapper();
+            var container = bootstrapper.Bootstrap();
+
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
